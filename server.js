@@ -1,7 +1,10 @@
 const express = require('express');
 const connectDB = require('./config/connectDB');
 const userRouter = require('./routes/userRoute');
+const centerRouter = require('./routes/centerRoute');
+const BranchRouter = require('./routes/branchRoute');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 //config dotenv 
 dotenv.config();
@@ -15,7 +18,7 @@ const app = express();
 //middlewares 
 app.use(express.json())
 // app.use(morgan('dev'))
-// app.use(cors())
+app.use(cors())
 
 //routes
 app.get('/',(req,res)=>{
@@ -23,6 +26,8 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/user',userRouter)
+app.use('/api/center',centerRouter)
+app.use('/api/branch',BranchRouter)
 
 const PORT = 8080 || process.env.PORT
 
